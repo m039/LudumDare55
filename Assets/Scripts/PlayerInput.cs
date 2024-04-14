@@ -4,9 +4,19 @@ namespace LD55
 {
     public class PlayerInput
     {
+        public bool ActionKey()
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool ActionKeyDown()
         {
-            if (Input.GetKeyDown(KeyCode.X))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 return true;
             }

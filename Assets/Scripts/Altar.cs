@@ -10,6 +10,12 @@ namespace LD55
 
         [SerializeField] Color _ActiveColor = Color.white;
 
+        [SerializeField] Ingredient[] _Ingredients;
+
+        [SerializeField] Transform _SpellBarLocation;
+
+        [SerializeField] float _ActivationDuration = 3f;
+
         #endregion
 
         Color _defaultColor;
@@ -20,6 +26,12 @@ namespace LD55
 
         public bool IsActivated => _activated;
 
+        public Ingredient[] Ingredients => _Ingredients;
+
+        SpellBar _spellBar;
+
+        float _activateTimer = 0;
+
         void Start()
         {
             _renderer = GetComponentInChildren<Renderer>();
@@ -28,8 +40,25 @@ namespace LD55
 
         public void Activate()
         {
-            _activated = true;
-            _renderer.material.color = _ActiveColor;
+            if (_spellBar == null)
+            {
+                _spellBar = SpellBarManager.Instance.GetSpellBar();
+            }
+
+            _spellBar.Attach(_SpellBarLocation);
+            _spellBar.Value = _activateTimer / _ActivationDuration;
+
+            _activateTimer += Time.deltaTime;
+
+            if (_activateTimer > _ActivationDuration)
+            {
+                SpellBarManager.Instance.ReleaseSpellBar(_spellBar);
+
+                _activated = true;
+                _renderer.material.color = _ActiveColor;
+
+                Ghost.Create(transform.position);
+            }            
         }
 
         void OnTriggerEnter(Collider other)
