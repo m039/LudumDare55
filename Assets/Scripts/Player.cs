@@ -61,7 +61,7 @@ namespace LD55
                 {
                     if (s_Buffer[i].GetComponentInParent<Enemy>() is Enemy enemy)
                     {
-                        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                        GameController.Instance.LoseGame();
                         return;
                     }
                 }

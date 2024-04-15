@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace LD55
@@ -15,7 +16,13 @@ namespace LD55
 
         [SerializeField] RectTransform _AltarActivationInfo;
 
+        [SerializeField] RectTransform _TutorialInfo;
+
         [SerializeField] RectTransform _Inventory;
+
+        [SerializeField] RectTransform _WinScreen;
+
+        [SerializeField] RectTransform _LoseScreen;
 
         #endregion
 
@@ -32,7 +39,8 @@ namespace LD55
             _infos = new()
             {
                 _IngredientsInfo,
-                _AltarActivationInfo
+                _AltarActivationInfo,
+                _TutorialInfo
             };
         }
 
@@ -40,6 +48,9 @@ namespace LD55
         {
             ShowInfo(null);
             ShowInventory(null);
+
+            _WinScreen.gameObject.SetActive(false);
+            _LoseScreen.gameObject.SetActive(false);
         }
 
         public void ShowInventory(IList<Ingredient> ingredients)
@@ -115,6 +126,16 @@ namespace LD55
             HideInfo(_AltarActivationInfo);
         }
 
+        public void ShowTutorialInfo()
+        {
+            ShowInfo(_TutorialInfo);
+        }
+
+        public void HideTutorialInfo()
+        {
+            HideInfo(_TutorialInfo);
+        }
+
         void ShowInfo(RectTransform info)
         {
             foreach (var infoTmp in _infos)
@@ -126,6 +147,26 @@ namespace LD55
         void HideInfo(RectTransform info)
         {
             info.gameObject.SetActive(false);
+        }
+
+        public void ShowWinScreen()
+        {
+            _WinScreen.gameObject.SetActive(true);
+        }
+
+        public void ShowLoseScreen()
+        {
+            _LoseScreen.gameObject.SetActive(true);
+        }
+
+        public void OnRestartLevelClicked()
+        {
+            GameController.Instance.RestartLevel();
+        }
+
+        public void OnNextLevelClicked()
+        {
+            GameController.Instance.NextLevel();
         }
     }
 }
