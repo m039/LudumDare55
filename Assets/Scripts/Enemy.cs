@@ -37,8 +37,10 @@ namespace LD55
 
         void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponentInParent<Projectile>() is Projectile projectile)
+            if (other.GetComponentInParent<Projectile>() is Projectile projectile &&
+                !projectile.Consumed)
             {
+                projectile.Consumed = true;
                 Destroy(projectile.gameObject);
                 Destroy(gameObject);
             }

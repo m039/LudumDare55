@@ -10,7 +10,11 @@ namespace LD55
 
         [SerializeField] float _Cooldown = 1;
 
+        [SerializeField] float _AttackRadius = 10f;
+
         #endregion
+
+        static readonly Collider[] s_Buffer = new Collider[64];
 
         EnemyZone _enemyZone;
 
@@ -29,6 +33,12 @@ namespace LD55
             }
         }
 
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, _AttackRadius);
+        }
+
         void Update()
         {
             ProcessEnemies();
@@ -42,19 +52,37 @@ namespace LD55
 
             _cooldownTimer = 0;
 
-            if (_enemyZone == null)
-                return;
-
-            foreach (var enemy in _enemyZone.Enemies)
+            void shoot(Transform target)
             {
-                if (enemy == null)
-                    continue;
-
-                var direction = enemy.transform.position - transform.position;
+                var direction = target.position - transform.position;
                 direction.Normalize();
                 _Visual.rotation = Quaternion.LookRotation(direction, Vector3.up);
                 Projectile.Create(transform.position, direction);
-                return;
+            }
+
+            if (_enemyZone != null)
+            {
+                foreach (var enemy in _enemyZone.Enemies)
+                {
+                    if (enemy == null)
+                        continue;
+
+                    shoot(enemy.transform);
+                    return;
+                }
+            }
+
+            var count = Physics.OverlapSphereNonAlloc(transform.position, _AttackRadius, s_Buffer);
+            if (count > 0)
+            {
+                for (int i = 0; i < count; i++)
+                {
+                    if (s_Buffer[i].GetComponentInParent<Enemy>() is Enemy enemy)
+                    {
+                        shoot(enemy.transform);
+                        return;
+                    }
+                }
             }
         }
     }

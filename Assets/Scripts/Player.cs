@@ -31,11 +31,15 @@ namespace LD55
 
         EnemyZone _currentEnemyZone;
 
+        CharacterController _characterController;
+
         public EnemyZone CurrentEnemyZone => _currentEnemyZone;
 
         void Awake()
         {
             Instance = this;
+
+            _characterController = GetComponent<CharacterController>();
         }
 
         void Update()
@@ -71,7 +75,7 @@ namespace LD55
             {
                 var offset = new Vector3(move.x, 0, move.y);
                 _Visual.rotation = Quaternion.LookRotation(offset, Vector3.up);
-                transform.position = transform.position + offset * _Speed * Time.deltaTime;
+                _characterController.Move(offset * _Speed * Time.deltaTime);
             }
 
             if (_activeObject != null &&

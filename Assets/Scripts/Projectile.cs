@@ -23,6 +23,8 @@ namespace LD55
 
         float _ttlTimer = 0;
 
+        public bool Consumed { get; set; }
+
         void Update()
         {
             ProcessMove();

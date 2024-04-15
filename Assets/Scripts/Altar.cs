@@ -26,7 +26,18 @@ namespace LD55
 
         public bool IsActivated => _activated;
 
-        public Ingredient[] Ingredients => _Ingredients;
+        public Ingredient[] Ingredients
+        {
+            get
+            {
+                return _Ingredients;
+            }
+
+            set
+            {
+                _Ingredients = value;
+            }
+        }
 
         SpellBar _spellBar;
 

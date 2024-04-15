@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace LD55
@@ -12,9 +10,22 @@ namespace LD55
 
         #endregion
 
-        public Color color => _Color;
+        public Color color
+        {
+            get => _Color;
+            set
+            {
+                _Color = value;
+                UpdateColor();
+            }
+        }
 
         void Start()
+        {
+            UpdateColor();
+        }
+
+        void UpdateColor()
         {
             var renderer = GetComponentInChildren<Renderer>();
             renderer.material.color = _Color;
@@ -25,7 +36,7 @@ namespace LD55
             gameObject.SetActive(false);
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if (other.GetComponentInParent<Player>() is Player player)
             {
