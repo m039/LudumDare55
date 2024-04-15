@@ -16,6 +16,8 @@ namespace LD55
 
         [SerializeField] float _ActivationDuration = 3f;
 
+        [SerializeField] ParticleSystem _Glowing;
+
         #endregion
 
         Color _defaultColor;
@@ -43,10 +45,13 @@ namespace LD55
 
         float _activateTimer = 0;
 
+        bool _activatePressed = false;
+
         void Start()
         {
             _renderer = GetComponentInChildren<Renderer>();
             _defaultColor = _renderer.material.color;
+            _Glowing.Stop();
         }
 
         public void Activate()
@@ -69,7 +74,8 @@ namespace LD55
                 _renderer.material.color = _ActiveColor;
 
                 Ghost.Create(transform.position);
-            }            
+            }
+            _activatePressed = true;
         }
 
         void OnTriggerEnter(Collider other)
@@ -94,6 +100,30 @@ namespace LD55
                 }
                 player.OnExit(this);
             }
+        }
+
+        void LateUpdate()
+        {
+            ProcessLateUpdate();
+        }
+
+        void ProcessLateUpdate()
+        {
+            if (_activatePressed)
+            {
+                if (!_Glowing.isPlaying)
+                {
+                    _Glowing.Play();
+                }
+            }
+            else
+            {
+                if (_Glowing.isPlaying)
+                {
+                    _Glowing.Stop();
+                }
+            }
+            _activatePressed = false;
         }
     }
 }

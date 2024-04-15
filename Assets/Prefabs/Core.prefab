@@ -215,9 +215,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 11499cfec45134048b1386fe8bac495b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -494,9 +494,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 11499cfec45134048b1386fe8bac495b, type: 3}
   m_Type: 0
-  m_PreserveAspect: 0
+  m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
   m_FillAmount: 1
@@ -930,8 +930,8 @@ Camera:
   m_GameObject: {fileID: 2985463238880543583}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0.15792987, g: 0.23959444, b: 0.3679245, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1751,7 +1751,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'You need these ingredients to summon a ghost: '
+  m_text: 'You need these crystals to summon a ghost: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8e12dcaafab1aa4f80ceae8121543ca, type: 2}
   m_sharedMaterial: {fileID: 4251965361215073723, guid: a8e12dcaafab1aa4f80ceae8121543ca,
@@ -2384,7 +2384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Picked ingredients: '
+  m_text: 'Picked crystals: '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: a8e12dcaafab1aa4f80ceae8121543ca, type: 2}
   m_sharedMaterial: {fileID: 4251965361215073723, guid: a8e12dcaafab1aa4f80ceae8121543ca,
